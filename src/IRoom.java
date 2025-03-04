@@ -1,12 +1,13 @@
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 public interface IRoom {
-    void checkIn(int roomNumber, Date startDate, Date endDate, String note, int numberGuests);
-    List<Room> availability(Date date);
+    void checkIn(int roomNumber, LocalDate startDate, LocalDate endDate, String note, int numberGuests);
+    List<Room> availability(LocalDate date);
     void checkOut(int roomNumber);
-    void Report(Date startDate, Date ednDate);
-    Room find(int beds , Date startDate, Date endDate);
-    Room importantFind(int beds , Date startDate, Date endDate);
-    void unavailable(int roomNumber, Date startDate, Date endDate);
+    void Report(LocalDate startDate, LocalDate ednDate);
+    Room find(int beds , LocalDate startDate, LocalDate endDate);
+    Room importantFind(int beds , LocalDate startDate, LocalDate endDate);
+    void unavailable(int roomNumber, LocalDate startDate, LocalDate endDate);
 }

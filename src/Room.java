@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,12 +23,12 @@ public class Room implements IRoom {
         return beds;
     }
     @Override
-    public void checkIn(int roomNumber, Date startDate, Date endDate, String note, int numberGuests) {
-
+    public void checkIn(int roomNumber, LocalDate startDate, LocalDate endDate, String note, int numberGuests) {
+        bookings.add(new Booking(roomNumber,startDate,endDate,note,numberGuests));
     }
 
     @Override
-    public List<Room> availability(Date date) {
+    public List<Room> availability(LocalDate date) {
         return List.of();
     }
 
@@ -37,22 +38,22 @@ public class Room implements IRoom {
     }
 
     @Override
-    public void Report(Date startDate, Date ednDate) {
+    public void Report(LocalDate startDate, LocalDate ednDate) {
 
     }
 
     @Override
-    public Room find(int beds, Date startDate, Date endDate) {
+    public Room find(int beds, LocalDate startDate, LocalDate endDate) {
         return null;
     }
 
     @Override
-    public Room importantFind(int beds, Date startDate, Date endDate) {
+    public Room importantFind(int beds, LocalDate startDate, LocalDate endDate) {
         return null;
     }
 
     @Override
-    public void unavailable(int roomNumber, Date startDate, Date endDate) {
+    public void unavailable(int roomNumber, LocalDate startDate, LocalDate endDate) {
 
     }
 }
