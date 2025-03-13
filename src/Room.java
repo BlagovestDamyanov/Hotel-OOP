@@ -25,6 +25,7 @@ public class Room implements IRoom {
     @Override
     public void checkIn(int roomNumber, LocalDate startDate, LocalDate endDate, String note, int numberGuests) {
         bookings.add(new Booking(roomNumber,startDate,endDate,note,numberGuests));
+        this.isAvailable = false;
     }
 
     @Override
