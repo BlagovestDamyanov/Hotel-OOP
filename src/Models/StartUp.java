@@ -1,3 +1,5 @@
+package Models;
+
 import CLI.CLI;
 
 public class StartUp {

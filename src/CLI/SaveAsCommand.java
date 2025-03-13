@@ -1,5 +1,7 @@
 package CLI;
 
+import CLI.Interfaces.ICommand;
+
 class SaveAsCommand implements ICommand {
     private FileManager fileManager;
     private String newPath;

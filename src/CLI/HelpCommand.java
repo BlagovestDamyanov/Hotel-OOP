@@ -1,5 +1,7 @@
 package CLI;
 
+import CLI.Interfaces.ICommand;
+
 class HelpCommand implements ICommand {
     private FileManager fileManager;
 

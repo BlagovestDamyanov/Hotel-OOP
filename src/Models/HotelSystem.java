@@ -1,4 +1,8 @@
-public class HotelSystem implements  IFileController{
+package Models;
+
+import Models.Interfaces.IFileController;
+
+public class HotelSystem implements IFileController {
     private String file;
     private boolean isOpen;
     @Override
