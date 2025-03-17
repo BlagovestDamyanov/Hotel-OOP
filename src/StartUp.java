@@ -1,7 +1,7 @@
-import CLI.CLI;
+import CLI.HotelCLI;
 
 public class StartUp {
     public static void main(String[] args) {
-        CLI.run();
+        HotelCLI.run();
     }
 }

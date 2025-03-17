@@ -1,6 +1,5 @@
 package CLI;
 
-import Interfaces.CommandsCLI;
 import FileCommands.*;
 import Interfaces.ExecuteCommands;
 
@@ -8,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class CLI {
+public class HotelCLI {
 
     public static void run(){
         Scanner scanner = new Scanner(System.in);
