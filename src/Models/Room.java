@@ -1,12 +1,8 @@
 package Models;
-
-import Models.Interfaces.HotelOperations;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room{
+public class Room {
     private int roomNumber;
     private int beds;
     private boolean isAvailable;
@@ -18,7 +14,7 @@ public class Room{
                 "roomNumber=" + roomNumber +
                 ", beds=" + beds +
                 ", isAvailable=" + isAvailable +
-                ", bookings=" + bookings +
+                ", bookings=" + bookings.toString() +
                 '}';
     }
 
@@ -28,6 +24,7 @@ public class Room{
         this.isAvailable = true;
         this.bookings = new ArrayList<>();
     }
+
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -36,5 +33,17 @@ public class Room{
         return beds;
     }
 
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
 
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+        this.isAvailable = false;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
 }
+

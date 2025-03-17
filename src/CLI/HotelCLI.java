@@ -1,7 +1,10 @@
 package CLI;
 
 import FileCommands.*;
+import HotelCommands.CheckIn;
+import HotelCommands.HotelManager;
 import Interfaces.ExecuteCommands;
+import Models.Room;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +15,13 @@ public class HotelCLI {
     public static void run(){
         Scanner scanner = new Scanner(System.in);
         FileManager fileManager = new FileManager();
+        HotelManager hotelManager = new HotelManager();
         Map<String, ExecuteCommands> commands = new HashMap<>();
 
+        // Initialize rooms (for simplicity, assuming room numbers 101, 102, 103, etc.)
+        hotelManager.rooms.put(101,new Room(101,2));
+        hotelManager.rooms.put(102, new Room(102,2));
+        hotelManager.rooms.put(103, new Room(103,4));
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine();
@@ -27,6 +35,7 @@ public class HotelCLI {
             commands.put("saveas", new SaveAsCommand(fileManager, argument));
             commands.put("help", new HelpCommand(fileManager));
             commands.put("exit", new ExitCommand(fileManager));
+            commands.put("checkin", new CheckIn(hotelManager,argument));
 
             ExecuteCommands command = commands.get(commandName);
             if (command != null) {
