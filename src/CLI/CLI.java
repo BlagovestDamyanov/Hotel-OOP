@@ -1,7 +1,8 @@
 package CLI;
 
-import CLI.Interfaces.CommandsCLI;
+import Interfaces.CommandsCLI;
 import FileCommands.*;
+import Interfaces.ExecuteCommands;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class CLI {
     public static void run(){
         Scanner scanner = new Scanner(System.in);
         FileManager fileManager = new FileManager();
-        Map<String, CommandsCLI> commands = new HashMap<>();
+        Map<String, ExecuteCommands> commands = new HashMap<>();
 
         while (true) {
             System.out.print("> ");
@@ -26,9 +27,9 @@ public class CLI {
             commands.put("save", new SaveCommand(fileManager));
             commands.put("saveas", new SaveAsCommand(fileManager, argument));
             commands.put("help", new HelpCommand(fileManager));
-            commands.put("exit", new ExitCommand());
+            commands.put("exit", new ExitCommand(fileManager));
 
-            CommandsCLI command = commands.get(commandName);
+            ExecuteCommands command = commands.get(commandName);
             if (command != null) {
                 command.execute();
             } else {

@@ -1,9 +1,8 @@
 package FileCommands;
 
-import CLI.FileManager;
-import CLI.Interfaces.CommandsCLI;
+import Interfaces.ExecuteCommands;
 
-public class CloseCommand implements CommandsCLI {
+public class CloseCommand implements ExecuteCommands {
     private FileManager fileManager;
 
     public CloseCommand(FileManager fileManager) {

@@ -1,9 +1,8 @@
 package FileCommands;
 
-import CLI.FileManager;
-import CLI.Interfaces.CommandsCLI;
+import Interfaces.ExecuteCommands;
 
-public class OpenCommand implements CommandsCLI {
+public class OpenCommand implements ExecuteCommands {
     private FileManager fileManager;
     private String filePath;
 

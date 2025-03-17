@@ -1,9 +1,8 @@
 package FileCommands;
 
-import CLI.FileManager;
-import CLI.Interfaces.CommandsCLI;
+import Interfaces.ExecuteCommands;
 
-public class SaveAsCommand implements CommandsCLI {
+public class SaveAsCommand implements ExecuteCommands {
     private FileManager fileManager;
     private String newPath;
 
