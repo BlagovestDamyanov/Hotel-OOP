@@ -1,8 +1,9 @@
-package CLI;
+package FileCommands;
 
-import CLI.Interfaces.ICommand;
+import CLI.FileManager;
+import CLI.Interfaces.CommandsCLI;
 
-class SaveCommand implements ICommand {
+public class SaveCommand implements CommandsCLI {
     private FileManager fileManager;
 
     public SaveCommand(FileManager fileManager) {

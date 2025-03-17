@@ -1,8 +1,9 @@
-package CLI;
+package FileCommands;
 
-import CLI.Interfaces.ICommand;
+import CLI.FileManager;
+import CLI.Interfaces.CommandsCLI;
 
-class CloseCommand implements ICommand {
+public class CloseCommand implements CommandsCLI {
     private FileManager fileManager;
 
     public CloseCommand(FileManager fileManager) {

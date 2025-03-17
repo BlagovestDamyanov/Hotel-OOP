@@ -1,5 +1,5 @@
 package CLI.Interfaces;
 
-public interface ICommand {
+public interface CommandsCLI {
     void execute();
 }

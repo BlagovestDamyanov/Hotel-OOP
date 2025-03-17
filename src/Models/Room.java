@@ -1,12 +1,12 @@
 package Models;
 
-import Models.Interfaces.IRoom;
+import Models.Interfaces.HotelOperations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room implements IRoom {
+public class Room implements HotelOperations {
     private int roomNumber;
     private int beds;
     private boolean isAvailable;

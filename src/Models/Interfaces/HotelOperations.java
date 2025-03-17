@@ -5,7 +5,7 @@ import Models.Room;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface IRoom {
+public interface HotelOperations {
     void checkIn(int roomNumber, LocalDate startDate, LocalDate endDate, String note, int numberGuests);
     List<Room> availability(LocalDate date);
     void checkOut(int roomNumber);

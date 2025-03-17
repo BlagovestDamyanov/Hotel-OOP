@@ -1,8 +1,9 @@
-package CLI;
+package FileCommands;
 
-import CLI.Interfaces.ICommand;
+import CLI.FileManager;
+import CLI.Interfaces.CommandsCLI;
 
-class OpenCommand implements ICommand {
+public class OpenCommand implements CommandsCLI {
     private FileManager fileManager;
     private String filePath;
 
