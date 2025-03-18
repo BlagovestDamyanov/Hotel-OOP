@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Booking {
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int roomNumber;
     private int guests;
     private String note;
 
-    public Booking(int roomNumber, Date startDate, Date endDate, String note, int guests) {
+    public Booking(int roomNumber, LocalDate startDate, LocalDate endDate, String note, int guests) {
         this.roomNumber = roomNumber;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -21,11 +21,11 @@ public class Booking {
         return roomNumber;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 

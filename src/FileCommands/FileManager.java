@@ -23,11 +23,6 @@ public class FileManager implements CommandsCLI {
             } else {
                 System.out.println("Successfully opened file: " + file.getName());
                 load();
-                System.out.println("Loaded Check-in Data:");
-                for (String[] checkin : checkinList) {
-                    System.out.println("Room: " + checkin[0] + ", Check-in: " + checkin[1] +
-                            ", Check-out: " + checkin[2] + ", Note: " + checkin[3] + "Guest " + checkin[4]);
-                }
             }
             isFileOpen = true;
         } catch (IOException e) {
