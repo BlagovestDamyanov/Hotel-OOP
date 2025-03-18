@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface HotelInstructions {
     void checkIn(String data);
-    List<String> availability();
-    void checkout();
+    void availability(String data);
+    void checkout(int roomNumber);
     void report();
     Room find();
     Room importantFind();

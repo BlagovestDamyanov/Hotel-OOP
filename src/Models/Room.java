@@ -1,4 +1,5 @@
 package Models;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,14 @@ public class Room {
     private boolean isAvailable;
     protected List<Booking> bookings;
 
+    public boolean isAvailableOn(LocalDate date) {
+        for (Booking booking : bookings) {
+            if (!date.isBefore(booking.getStartDate()) && !date.isAfter(booking.getEndDate())) {
+                return false;
+            }
+        }
+        return true;
+    }
     @Override
     public String toString() {
         return "Room{" +

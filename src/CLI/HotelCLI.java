@@ -1,7 +1,9 @@
 package CLI;
 
 import FileCommands.*;
+import HotelCommands.Availability;
 import HotelCommands.CheckIn;
+import HotelCommands.Checkout;
 import HotelCommands.HotelManager;
 import Interfaces.ExecuteCommands;
 import Models.Room;
@@ -16,11 +18,10 @@ public class HotelCLI {
         Scanner scanner = new Scanner(System.in);
         FileManager fileManager = new FileManager();
         HotelManager hotelManager = new HotelManager(fileManager);
-        Map<String, ExecuteCommands> commands = new HashMap<>();
 
-        hotelManager.rooms.put(101,new Room(101,2));
-        hotelManager.rooms.put(102, new Room(102,2));
-        hotelManager.rooms.put(103, new Room(103,4));
+        Map<String, ExecuteCommands> commands = new HashMap<>();
+        SeedRooms.seedRooms(hotelManager);
+
         while (true) {
             System.out.print("> ");
             String input = scanner.nextLine();
@@ -35,6 +36,8 @@ public class HotelCLI {
             commands.put("help", new HelpCommand(fileManager));
             commands.put("exit", new ExitCommand(fileManager));
             commands.put("checkin", new CheckIn(hotelManager,argument));
+            commands.put("availability" , new Availability(hotelManager,argument));
+            commands.put("checkout", new Checkout(hotelManager,argument));
 
             ExecuteCommands command = commands.get(commandName);
             if (command != null) {
