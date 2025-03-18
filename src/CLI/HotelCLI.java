@@ -15,10 +15,9 @@ public class HotelCLI {
     public static void run(){
         Scanner scanner = new Scanner(System.in);
         FileManager fileManager = new FileManager();
-        HotelManager hotelManager = new HotelManager();
+        HotelManager hotelManager = new HotelManager(fileManager);
         Map<String, ExecuteCommands> commands = new HashMap<>();
 
-        // Initialize rooms (for simplicity, assuming room numbers 101, 102, 103, etc.)
         hotelManager.rooms.put(101,new Room(101,2));
         hotelManager.rooms.put(102, new Room(102,2));
         hotelManager.rooms.put(103, new Room(103,4));

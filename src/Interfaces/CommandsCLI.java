@@ -7,4 +7,5 @@ public interface CommandsCLI {
     void saveAs(String newPath);
     void help();
     void exit();
+    void load();
 }

@@ -2,14 +2,15 @@ package FileCommands;
 
 import Interfaces.CommandsCLI;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManager implements CommandsCLI {
     private File file;
     private boolean isFileOpen = false;
     private String filePath;
-
+    public List<String[]> checkinList = new ArrayList<>();
     @Override
     public void open(String path) {
         file = new File(path);
@@ -21,6 +22,12 @@ public class FileManager implements CommandsCLI {
                 System.out.println("File not found. A new file has been created: " + file.getName());
             } else {
                 System.out.println("Successfully opened file: " + file.getName());
+                load();
+                System.out.println("Loaded Check-in Data:");
+                for (String[] checkin : checkinList) {
+                    System.out.println("Room: " + checkin[0] + ", Check-in: " + checkin[1] +
+                            ", Check-out: " + checkin[2] + ", Note: " + checkin[3] + "Guest " + checkin[4]);
+                }
             }
             isFileOpen = true;
         } catch (IOException e) {
@@ -46,6 +53,7 @@ public class FileManager implements CommandsCLI {
             return;
         }
         System.out.println("Successfully saved " + file.getName());
+        writeToFile(file.getName(),checkinList);
     }
 
     @Override
@@ -60,6 +68,7 @@ public class FileManager implements CommandsCLI {
                 file = newFile;
                 filePath = newPath;
                 System.out.println("Successfully saved " + newFile.getName());
+                writeToFile(file.getName(),checkinList);
             } else {
                 System.out.println("Error saving file.");
             }
@@ -83,5 +92,29 @@ public class FileManager implements CommandsCLI {
     public void exit() {
         System.out.println("Exiting the program...");
         System.exit(0);
+    }
+
+    @Override
+    public void load() {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] checkinData = line.split(" ");
+                checkinList.add(checkinData);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
+    public static void writeToFile(String filename, List<String[]> checkinList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (String[] checkin : checkinList) {
+                writer.write(String.join(" ", checkin));
+                writer.newLine();
+            }
+            System.out.println("Data successfully written to " + filename);
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
     }
 }

@@ -1,12 +1,9 @@
 package HotelCommands;
 
+import FileCommands.FileManager;
 import Interfaces.HotelInstructions;
 import Models.Booking;
 import Models.Room;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,16 +12,16 @@ import java.util.Map;
 
 public class HotelManager implements HotelInstructions {
     public Map<Integer, Room> rooms = new HashMap<>();
-    private void saveReservationToFile(int roomNumber, Date startDate, Date endDate, String notes, String guests) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("reservations.txt", true))) {
-            writer.write("Room " + roomNumber + " from " + startDate + " to " + endDate + ", Notes: " + notes + ", Guests: " + guests);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private FileManager fileManager;
+
+    public HotelManager(FileManager fileManager) {
+        this.fileManager = fileManager;
     }
+
     @Override
     public void checkIn(String data) {
+        List<String[]> loadedData = fileManager.checkinList;
+
        String [] reservationInfo = data.split(" ");
         if (reservationInfo.length < 4) {
             System.out.println("Insufficient reservation data.");
@@ -49,9 +46,17 @@ public class HotelManager implements HotelInstructions {
             Booking booking = new Booking(roomNumber, startDate, endDate, note, guests);
             room.addBooking(booking);
             room.setAvailable(false);
+            String[] checkinData = {
+                    String.valueOf(roomNumber),
+                    dateFormat.format(startDate),
+                    dateFormat.format(endDate),
+                    note,
+                    String.valueOf(guests)
+            };
+            fileManager.checkinList.add(checkinData);
             System.out.println(room.toString() + "is reserved");
         }else{
-            return;
+            System.out.println("Room is already reserved.");
         }
     }
 
