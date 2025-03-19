@@ -2,11 +2,11 @@ package HotelCommands;
 
 import Interfaces.ExecuteCommands;
 
-public class Checkout implements ExecuteCommands {
+public class CheckoutCommand implements ExecuteCommands {
     private HotelManager hotelManager;
     private String data;
 
-    public Checkout(HotelManager hotelManager, String data) {
+    public CheckoutCommand(HotelManager hotelManager, String data) {
         this.hotelManager = hotelManager;
         this.data = data;
     }
