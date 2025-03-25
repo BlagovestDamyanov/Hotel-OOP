@@ -168,6 +168,10 @@ public class HotelManager implements HotelInstructions {
 
     @Override
     public void availability(String date) {
+        if(!fileManager.isFileOpen()){
+            System.out.println("No file is currently open.");
+            return;
+        }
         List<String> availableRooms = new ArrayList<>();
         List<String> occupiedRooms = new ArrayList<>();
         LocalDate targetDate;
