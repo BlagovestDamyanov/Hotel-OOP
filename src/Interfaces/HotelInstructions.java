@@ -8,8 +8,8 @@ public interface HotelInstructions {
     void checkIn(String data);
     void availability(String data);
     void checkout(int roomNumber);
-    void report();
-    Room find();
+    void report(String data);
+    void find(String data);
     Room importantFind();
-    void unavailable();
+    public void unavailable(String data);
 }

@@ -1,10 +1,7 @@
 package CLI;
 
 import FileCommands.*;
-import HotelCommands.AvailabilityCommand;
-import HotelCommands.CheckInCommand;
-import HotelCommands.CheckoutCommand;
-import HotelCommands.HotelManager;
+import HotelCommands.*;
 import Interfaces.ExecuteCommands;
 
 import java.util.HashMap;
@@ -37,6 +34,10 @@ public class HotelCLI {
             commands.put("checkin", new CheckInCommand(hotelManager,argument));
             commands.put("availability" , new AvailabilityCommand(hotelManager,argument));
             commands.put("checkout", new CheckoutCommand(hotelManager,argument));
+            commands.put("find", new FindCommand(hotelManager,argument));
+            commands.put("report", new ReportCommand(hotelManager,argument));
+            commands.put("unavailable", new UnavailableCommand(hotelManager,argument));
+
 
             ExecuteCommands command = commands.get(commandName);
             if (command != null) {

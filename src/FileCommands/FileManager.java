@@ -9,8 +9,14 @@ import java.util.List;
 public class FileManager implements CommandsCLI {
     private File file;
     private boolean isFileOpen = false;
+
+    public boolean isFileOpen() {
+        return isFileOpen;
+    }
+
     private String filePath;
     public List<String[]> checkinList = new ArrayList<>();
+    public List<String[]> unavailableList = new ArrayList<>();
     @Override
     public void open(String path) {
         file = new File(path);
