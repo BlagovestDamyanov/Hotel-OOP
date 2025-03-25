@@ -13,6 +13,6 @@ public class CheckoutCommand implements ExecuteCommands {
 
     @Override
     public void execute() {
-        hotelManager.checkout(Integer.parseInt(data));
+        hotelManager.checkout(data);
     }
 }

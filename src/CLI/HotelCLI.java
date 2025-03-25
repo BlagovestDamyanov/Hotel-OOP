@@ -37,7 +37,7 @@ public class HotelCLI {
             commands.put("find", new FindCommand(hotelManager,argument));
             commands.put("report", new ReportCommand(hotelManager,argument));
             commands.put("unavailable", new UnavailableCommand(hotelManager,argument));
-
+            commands.put("find!", new ImportantFindCommand(hotelManager,argument));
 
             ExecuteCommands command = commands.get(commandName);
             if (command != null) {

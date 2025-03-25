@@ -63,13 +63,14 @@ public class FileManager implements CommandsCLI {
             System.out.println("No file is currently open.");
             return;
         }
+
         File newFile = new File(newPath);
         try {
             if (file.renameTo(newFile)) {
                 file = newFile;
                 filePath = newPath;
                 System.out.println("Successfully saved " + newFile.getName());
-                writeToFile(file.getName(),checkinList);
+                writeToFile(newFile.getName(), checkinList);
             } else {
                 System.out.println("Error saving file.");
             }
@@ -77,6 +78,7 @@ public class FileManager implements CommandsCLI {
             System.out.println("Error saving file: " + e.getMessage());
         }
     }
+
 
     @Override
     public void help() {
