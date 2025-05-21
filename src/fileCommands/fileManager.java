@@ -6,17 +6,43 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класът {@code fileManager} предоставя операции за работа с файлове като отваряне,
+ * затваряне, запазване и запазване с ново име. Използва се в система с команден ред
+ * (CLI) за управление на информация за хотелски стаи.
+ * Съхранява данни за настанени гости и временно недостъпни стаи.
+ */
 public class fileManager implements commandsCLI {
+
     private File file;
     private boolean isFileOpen = false;
+    private String filePath;
 
+    /**
+     * Списък с масиви от низове, съдържащ информация за настаняванията.
+     */
+    public List<String[]> checkinList = new ArrayList<>();
+
+    /**
+     * Списък с масиви от низове, съдържащ информация за временно недостъпни стаи.
+     */
+    public List<String[]> unavailableList = new ArrayList<>();
+
+    /**
+     * Проверява дали в момента има отворен файл.
+     *
+     * @return {@code true} ако има отворен файл, в противен случай {@code false}.
+     */
     public boolean isFileOpen() {
         return isFileOpen;
     }
 
-    private String filePath;
-    public List<String[]> checkinList = new ArrayList<>();
-    public List<String[]> unavailableList = new ArrayList<>();
+    /**
+     * Отваря файл с подадения път. Ако файлът не съществува, се създава нов.
+     * Зарежда съдържанието на файла в списъка с настанявания.
+     *
+     * @param path Път до файла, който ще бъде отворен.
+     */
     @Override
     public void open(String path) {
         file = new File(path);
@@ -25,42 +51,53 @@ public class fileManager implements commandsCLI {
         try {
             if (!file.exists()) {
                 file.createNewFile();
-                System.out.println("File not found. A new file has been created: " + file.getName());
+                System.out.println("Файлът не беше намерен. Създаден е нов файл: " + file.getName());
             } else {
-                System.out.println("Successfully opened file: " + file.getName());
+                System.out.println("Файлът е успешно отворен: " + file.getName());
                 load();
             }
             isFileOpen = true;
         } catch (IOException e) {
-            System.out.println("Error opening the file: " + e.getMessage());
+            System.out.println("Грешка при отваряне на файла: " + e.getMessage());
             System.exit(1);
         }
     }
 
+    /**
+     * Затваря текущо отворения файл.
+     */
     @Override
     public void close() {
         if (!isFileOpen) {
-            System.out.println("No file is currently open.");
+            System.out.println("Няма отворен файл.");
             return;
         }
         isFileOpen = false;
-        System.out.println("Successfully closed " + file.getName());
+        System.out.println("Файлът е успешно затворен: " + file.getName());
     }
 
+    /**
+     * Записва текущите данни за настаняванията във файла.
+     */
     @Override
     public void save() {
         if (!isFileOpen) {
-            System.out.println("No file is currently open.");
+            System.out.println("Няма отворен файл.");
             return;
         }
-        System.out.println("Successfully saved " + file.getName());
-        writeToFile(file.getName(),checkinList);
+        System.out.println("Файлът е успешно запазен: " + file.getName());
+        writeToFile(file.getName(), checkinList);
     }
 
+    /**
+     * Записва текущите данни във файл с ново име.
+     *
+     * @param newPath Новият път (име) на файла.
+     */
     @Override
     public void saveAs(String newPath) {
         if (!isFileOpen) {
-            System.out.println("No file is currently open.");
+            System.out.println("Няма отворен файл.");
             return;
         }
 
@@ -69,17 +106,19 @@ public class fileManager implements commandsCLI {
             if (file.renameTo(newFile)) {
                 file = newFile;
                 filePath = newPath;
-                System.out.println("Successfully saved " + newFile.getName());
+                System.out.println("Успешно запазване като: " + newFile.getName());
                 writeToFile(newFile.getName(), checkinList);
             } else {
-                System.out.println("Error saving file.");
+                System.out.println("Грешка при запазване на файла.");
             }
         } catch (Exception e) {
-            System.out.println("Error saving file: " + e.getMessage());
+            System.out.println("Грешка при запазване на файла: " + e.getMessage());
         }
     }
 
-
+    /**
+     * Показва списък с поддържаните команди и тяхното описание.
+     */
     @Override
     public void help() {
         System.out.println("Поддържаните команди са:");
@@ -114,13 +153,18 @@ public class fileManager implements commandsCLI {
         System.out.println("    Обявява стая <стая> за временно недостъпна в периода от <от> до <до> с бележка <бележка>.");
     }
 
-
+    /**
+     * Изход от програмата.
+     */
     @Override
     public void exit() {
-        System.out.println("Exiting the program...");
+        System.out.println("Изход от програмата...");
         System.exit(0);
     }
 
+    /**
+     * Зарежда съдържанието на файла в списъка с настанявания (checkinList).
+     */
     @Override
     public void load() {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -130,18 +174,25 @@ public class fileManager implements commandsCLI {
                 checkinList.add(checkinData);
             }
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Грешка при четене на файл: " + e.getMessage());
         }
     }
+
+    /**
+     * Записва подадения списък с данни за настанявания във файл.
+     *
+     * @param filename     Името на файла, в който да се запише информацията.
+     * @param checkinList  Списък с данни за настаняванията.
+     */
     public static void writeToFile(String filename, List<String[]> checkinList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             for (String[] checkin : checkinList) {
                 writer.write(String.join(" ", checkin));
                 writer.newLine();
             }
-            System.out.println("Data successfully written to " + filename);
+            System.out.println("Данните са успешно записани във файла: " + filename);
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            System.err.println("Грешка при запис във файл: " + e.getMessage());
         }
     }
 }
